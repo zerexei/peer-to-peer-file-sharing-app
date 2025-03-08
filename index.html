@@ -9,10 +9,42 @@
 
     <script defer src="peerjs.min.js"></script>
     <script defer src="index.js"></script>
+
+    <style type="text/tailwindcss">
+      .h1 {
+        @apply text-4xl;
+      }
+      .button {
+        @apply py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none cursor-pointer;
+      }
+
+      .button:hover {
+        @apply border-teal-400 text-teal-600;
+      }
+
+      .bug {
+        border: 1px solid red !important;
+      }
+    </style>
   </head>
+
   <body>
-    <main>
-      <h1>Hello World</h1>
+    <main class="max-w-screen-sm mx-auto py-12 space-y-6">
+      <header class="">
+        <h1 class="h1">Peer to Peer File Sharing App</h1>
+      </header>
+
+      <section class="peer-welcome">
+        <button class="peer-start-session">Start Session</button>
+      </section>
+
+      <section class="hidden peer-session">
+        <div class="flex gap-2">
+          <p class="peer-id"></p>
+          <button class="button peer-copy">Copy</button>
+          <button class="button peer-stop">Delete</button>
+        </div>
+      </section>
     </main>
   </body>
 </html>
