@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Peer to Peer File Sharing App</title>
 
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
@@ -12,6 +13,7 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
     />
+
     <script
       defer
       type="text/javascript"
@@ -45,28 +47,40 @@
   </head>
 
   <body>
+    <!-- server error overlay -->
     <div
-      class="hidden fixed inset-0 bg-black/50 peer-loading flex items-center justify-center"
+      class="hidden fixed inset-0 bg-slate-700 flex items-center justify-center"
+      data-target="error-500"
+    >
+      <p class="text-6xl font-extrabold text-center">
+        500 | Service Unavailable
+      </p>
+    </div>
+
+    <!-- loading overlay -->
+    <div
+      class="hidden fixed inset-0 bg-black/50 flex items-center justify-center"
+      data-target="loading-overlay"
     >
       <p class="text-8xl font-extrabold">Loading...</p>
     </div>
 
     <main class="max-w-screen-sm mx-auto py-12 space-y-6">
-      <!--  -->
+      <!-- app  title -->
       <header class="">
         <h1 class="h1">Peer to Peer File Sharing App</h1>
       </header>
 
-      <!--  -->
+      <!-- start peer session -->
       <section class="peer-welcome">
         <button onclick="startSession()" class="button peer-start-session">
           Start Session
         </button>
       </section>
 
-      <!--  -->
+      <!-- peer session -->
       <section class="hidden peer-session space-y-6">
-        <!--  -->
+        <!-- current peer session -->
         <div class="flex items-center gap-2">
           <p class="peer-id"></p>
           <button onclick="copySessionId()" class="button peer-copy-session-id">
@@ -80,28 +94,30 @@
           </button>
         </div>
 
-        <!--  -->
-        <form onsubmit="connect(event)" class="flex items-center gap-2 w-3/4">
+        <!-- peer connect -->
+        <form
+          onsubmit="connect(event)"
+          data-target="form-peer-connect"
+          class="flex items-center gap-2 w-3/4"
+        >
           <input
             type="text"
             name="peer-connect-id"
             class="peer-set-connect-id w-full border border-slate-300 rounded-md h-10 px-2 py-0.5 focus:outline-teal-400 focus:outline focus:border-teal-500"
+            required
           />
           <button class="button peer-connect">Connect</button>
         </form>
 
-        <!--  -->
-        <div class="peer-connections">
-          <!-- <ul class="space-y-1">
-            <li class="p-2 cursor-pointer hover:bg-teal-400 bg-teal-200 rounded-md">2e8c25d1-3400-46d9-a8a7-eecf7cad970b</li>
-            <li class="p-2 cursor-pointer hover:bg-teal-400 bg-slate-200 rounded-md">2e8c25d1-3400-46d9-a8a7-eecf7cad970b</li>
-            <li class="p-2 cursor-pointer hover:bg-teal-400 bg-slate-200 rounded-md">2e8c25d1-3400-46d9-a8a7-eecf7cad970b</li>
-            <li class="p-2 cursor-pointer hover:bg-teal-400 bg-slate-200 rounded-md">2e8c25d1-3400-46d9-a8a7-eecf7cad970b</li>
-          </ul> -->
-        </div>
+        <!-- peer connections  -->
+        <div class="peer-connections"></div>
 
-        <!--  -->
-        <form onsubmit="sendPayload(event)" class="peer-send-payload space-y-4">
+        <!-- send payload -->
+        <form
+          onsubmit="sendPayload(event)"
+          data-target="form-send-payload"
+          class="peer-send-payload space-y-4"
+        >
           <div class="flex items-center gap-2">
             <label class="cursor-pointer">
               <input
